@@ -1,6 +1,11 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
+import styled from "@emotion/styled/macro";
 
-const AuthForm = ({ onSubmit, buttonText }) => {
+import { Input } from "./FormElements";
+import Spinner from "./Spinner";
+
+const AuthForm = ({ onSubmit, submitButton }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { username, password } = event.target.elements;
@@ -12,20 +17,38 @@ const AuthForm = ({ onSubmit, buttonText }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form
+      css={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        "> div": {
+          margin: "10px auto",
+          width: "100%",
+          maxWidth: "300px",
+        },
+      }}
+      onSubmit={handleSubmit}
+    >
+      <FormGroup>
         <label htmlFor="username">Username</label>
-        <input id="username" />
-      </div>
-      <div>
+        <Input id="username" />
+      </FormGroup>
+      <FormGroup>
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" />
-      </div>
+        <Input id="password" type="password" />
+      </FormGroup>
       <div>
-        <button type="submit">{buttonText}</button>
+        {React.cloneElement(submitButton, { type: "submit" })}
+        {/* <Spinner css={{ marginLeft: 5 }} /> */}
       </div>
     </form>
   );
 };
+
+const FormGroup = styled.div({
+  display: "flex",
+  flexDirection: "column",
+});
 
 export default AuthForm;
