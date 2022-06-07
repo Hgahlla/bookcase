@@ -1,7 +1,13 @@
 import React from "react";
 
+import AuthPage from "./pages/AuthPage";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <AuthPage />
+    </>
+  );
 };
 
 export default App;
